@@ -1,6 +1,4 @@
-require: slotfilling/slotFilling.sc
-  module = sys.zb-common
-  
+
 require: text/text.sc
     module = zenbot-common
     
