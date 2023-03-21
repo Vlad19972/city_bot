@@ -8,10 +8,6 @@ require: where/where.sc
 require: common.js
     module = zenbot-common
 
-require: hangmanGameData.csv
-    name = hangmanGameData
-    var = $hangmanGameData
-    
 require: cities-ru.csv
     name = name
     var = $name
@@ -22,13 +18,6 @@ require: cities-ru.csv
     
     
     
-
-patterns:
-    $Word = $entity<hangmanGameData> || converter = function ($parseTree) {
-        var id = $parseTree.hangmanGameData[0].value;
-        return $hangmanGameData[id].value;
-        };
-
 theme: /
 
     state: Rules
