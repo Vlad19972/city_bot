@@ -11,6 +11,12 @@ require: common.js
 require: hangmanGameData.csv
     name = hangmanGameData
     var = $hangmanGameData
+    
+require: hangmanGameData.csv
+    name = hangmanGameData
+    var = $hangmanGameData
+    
+    
 
 patterns:
     $Word = $entity<hangmanGameData> || converter = function ($parseTree) {
@@ -23,6 +29,7 @@ theme: /
     state: Start
         q!: $regex</start>
         a: Привет.
+        go!: /Can I Help You?
 
     state: CityPattern
         q: * $City *
