@@ -10,14 +10,14 @@ require: where/where.sc
 require: common.js
     module = zenbot-common
 
-require: hangmanGameData.csv
-    name = HangmanGameData
-    var = $HangmanGameData
+require: cities-ru.csv
+    name = cities-ru
+    var = $cities-ru
 
 patterns:
-    $Word = $entity<HangmanGameData> || converter = function ($parseTree) {
-        var id = $parseTree.HangmanGameData[0].value;
-        return $HangmanGameData[id].value;
+    $Word = $entity<cities-ru> || converter = function ($parseTree) {
+        var id = $parseTree.cities-ru[0].value;
+        return $cities-ru[id].value;
         };
 
 theme: /
