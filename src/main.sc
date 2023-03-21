@@ -16,6 +16,10 @@ require: cities-ru.csv
     name = name
     var = $name
     
+require: cities-ru.csv
+    name = country
+    var = $country
+    
     
     
 
@@ -27,27 +31,36 @@ patterns:
 
 theme: /
 
-    state: Start
+    state: Rules
         q!: $regex</start>
-        a: Привет.
-        go!: /Can I Help You?
+        intent!: /LetsPlay
+        a: Let's play Guess Number game. I think of a counry you guess its capital. Ready to start?
+        go!: /Rules/Agree
 
-    state: CityPattern
-        q: * $City *
-        a: Город: {{$parseTree._City.name}}
-        
-    state: Text
-        q: $Word
-        a: Слово из справочника: {{$parseTree._Word.word}}
+        state: Agree
 
-    state: NoMatch
-        event!: noMatch
-        a: Я не понял. Вы сказали: {{$request.query}}
+            state: Yes
+                intent: /Yes
+                go!: /Game
 
-    state: reset
-        q!: reset
+            state: No
+                intent: /No
+                a: That's a pity! If you change your mind, just text "Lets's play"
+    
+    state: Game
         script:
-            $session = {};
-            $client = {};
-        go!: /
+            $session.country = Object.country($country);
+            var country = country[chooseRandcountryKey($session.keys)].value.name
+            $reactions.transition("/CheckCapital")
+            
+    state: CheckCapital
+        intent: /Capital
+        script:
+            var Capital = $parseTree._Capital;
+            if (Capital == $session.Capital) {
+                $reactions.answer("You won! Let's play one more time?");
+                $reactions.transition("/Rules/Agree");
+            }
+            else /endThisGame
+
 
