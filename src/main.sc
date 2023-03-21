@@ -24,7 +24,7 @@ theme: /
 
     state: Start
         q!: $regex</start>
-        a: Погнали.
+        a: Привет.
 
     state: CityPattern
         q: * $City *
