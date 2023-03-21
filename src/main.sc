@@ -12,9 +12,10 @@ require: hangmanGameData.csv
     name = hangmanGameData
     var = $hangmanGameData
     
-require: hangmanGameData.csv
-    name = hangmanGameData
-    var = $hangmanGameData
+require: cities-ru.csv
+    name = name
+    var = $name
+    
     
     
 
